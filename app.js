@@ -16,12 +16,12 @@ number.forEach((num) => {
     num.addEventListener('click', function(e) {
         displayNum(e.target.textContent)
     })
-    
 })
 
+
 function displayNum(num){
-    if(previousNumber !== '' && currentNumber !== '' && operator === '') {
-        previousNumber = '';
+    if(previousNumber !== '' && currentNumber !== '' && operator !== '') {
+        currentNumber = '';
         display.textContent = currentNumber;
     }
     if(currentNumber.length <=13) {
@@ -61,7 +61,11 @@ function operate() {
     } else if (operator === 'x') {
         previousNumber = Number(previousNumber) * Number(currentNumber);
     } else if (operator === '/') {
-        previousNumber = Number(previousNumber) / Number(currentNumber);
+        if (currentNumber == 0) {
+            previousNumber = 'Error'
+        } else {
+            previousNumber = Number(previousNumber) / Number(currentNumber)
+        }
 
     };
     display.textContent = roundNumber(previousNumber)
@@ -84,3 +88,7 @@ function displayResult() {
 }
 
 
+
+
+//if there is something in currentNum & previousNum => click Num will clear all and start over again.
+//if 
