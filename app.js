@@ -100,6 +100,10 @@ function operatorInput(op) {
     previousNumber = currentNumber;
     currentNumber = ''
     operator = op;
+    display.textContent = previousNumber + operator;
+    if(operator === 'x') {
+        display.textContent = previousNumber + '*'
+    }
 }
 
 let equal = false
