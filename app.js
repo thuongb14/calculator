@@ -10,20 +10,39 @@ const negative = document.querySelector('.negate');
 
 display.textContent = '0';
 
-
-let decimal = false;
-
-deci.addEventListener('click', function() {
-  decimal = true;
-})
-
 let clearCal = false;
 let previousNumber = '';
 let currentNumber = '';
 let operator = '';
 
 
+//listen to key press
+window.addEventListener('keydown', keyInput);
 
+function keyInput(e) {
+    e.preventDefault();
+    if (e.key >= 0 && e.key <=9) {
+        displayNum(e.key);
+    } 
+    if (e.key === '+' || e.key === '-' || e.key === '/') {
+        operatorInput (e.key);
+    }
+    if (e.key === '*') {
+        operatorInput ('x');
+    }
+    if (e.key === 'Enter' || e.key === '=' && currentNumber != '' && previousNumber != '' && operator != '') {
+        operate();
+    }
+    if (e.key === 'Escape') {
+        clearAll();
+    } 
+    if (e.key === 'Backspace') {
+        deleteNum();
+    }
+    if (e.key === '.') {
+        addDecimal();
+    } 
+}
 
 //Delete 1 number function
 del.addEventListener('click', deleteNum);
@@ -57,7 +76,7 @@ number.forEach((num) => {
 function displayNum(num){
   currentNumber = currentNumber.toString();
   previousNumber = previousNumber.toString();
-    if(currentNumber.length <=13) {
+    if(currentNumber.length <= 13) {
         currentNumber += num;
         display.textContent = currentNumber;
     } else if (currentNumber.length > 13) {
@@ -66,8 +85,6 @@ function displayNum(num){
       currentNumber = '';
       clearCal = false;
       currentNumber += num;
-      display.textContent = currentNumber;
-    } if (decimal == true) {
       display.textContent = currentNumber;
     }
 }
@@ -117,7 +134,7 @@ function operate() {
 
 //round big num
 function roundNumber(num) {
-    return Math.round(num * 100000) / 100000
+    return Math.round(num * 100000) / 100000;
 }
 
 //round float
@@ -126,14 +143,15 @@ function displayResult() {
         display.textContent = previousNumber;
         currentNumber = previousNumber;
         previousNumber = ''
-    } else{
+    } else if (previousNumber.length > 13) {
         display.textContent = previousNumber.slice(0, 13) + '...';
         currentNumber = previousNumber;
-        previousNumber = ''
+        previousNumber = '';
     }
 }
 
 // add decimal dot
+
 deci.addEventListener('click', addDecimal);
 
 function addDecimal() {
@@ -149,6 +167,6 @@ negative.addEventListener('click', addNegative);
 function addNegative() {
     if(!currentNumber.includes("-")) {
         currentNumber = "-" + currentNumber;
-        display.textContent = currentNumber
+        display.textContent = currentNumber;
     };
 };
