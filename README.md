@@ -7,7 +7,7 @@
 https://thuongb14.github.io/calculator/
 
 ## Preview
-![Alt text]()
+<img src="https://i.imgur.com/uWeMyOY.png">
 
 ## Summary
 The goal of this Odin Project assignment was to create a functioning calculator using HTML, CSS, and vanilla Javascript.
